@@ -12,35 +12,49 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
+        /* 1. TRAVA DO SISTEMA E FUNDO CLARO */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100dvh;
             
-            /* UNIFICAÇÃO DO TOPO: Alterado para a cor escura exata do seu cabeçalho (#0f172a).
-               Isso fará com que a área do relógio e da bateria se misture nativamente com o app */
-            background-color: #0f172a; 
+            /* Fundo geral da página claro. Resolve de vez a barra escura inferior */
+            background-color: #f8fafc; 
             
             overflow: hidden;
             overscroll-behavior: none;
             position: fixed;
         }
 
+        /* 2. TRUQUE DO TOPO ESCURO */
+        /* Cria uma faixa que ocupa EXATAMENTE a área do relógio e da Ilha Dinâmica */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: env(safe-area-inset-top);
+            background-color: #0f172a; /* Azul escuro do seu cabeçalho */
+            z-index: 1;
+        }
+
+        /* 3. IFRAME COLADO NO CHÃO */
         iframe {
             position: absolute;
             width: 100vw;
             border: none;
             
-            /* Inicia logo após a barra de status do iPhone */
+            /* Inicia logo abaixo da faixa escura do relógio */
             top: env(safe-area-inset-top);
             
-            /* CORREÇÃO DA ZONA MORTA: Removemos o desconto do safe-area-inset-bottom.
-               Agora o iframe desce e preenche o espaço até o limite físico da tela */
-            height: calc(100dvh - env(safe-area-inset-top));
-            
+            /* O pulo do gato: em vez de calcular a altura, colamos a base no fundo da tela (0) */
+            bottom: 0;
             left: 0;
-            background-color: #f8fafc;
+            
+            z-index: 2;
+            background-color: transparent;
         }
     </style>
 </head>
