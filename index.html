@@ -3,43 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <title>MeuOrc</title>
+    <title>Sistema ATI</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="MeuOrc">
+    <meta name="apple-mobile-web-app-title" content="Sistema ATI">
     
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
-        /* RESET E BLOQUEIO DO EFEITO ELÁSTICO */
+        /* 1. TRAVA DO SISTEMA E COR DO TOPO */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100dvh;
             
-            /* Esta cor vai preencher a área do relógio e a faixa inferior (barrinha home) */
-            background-color: #f8fafc; 
+            /* COR CRÍTICA: Pinta a área do relógio/bateria E o fundo do efeito elástico 
+               com a mesma cor do cabeçalho do seu sistema, camuflando o "puxão" */
+            background-color: #0f172a; 
             
             overflow: hidden;
-            overscroll-behavior: none; /* Mata o efeito elástico nativo */
-            position: fixed; /* Trava o viewport, impedindo arraste da janela */
+            overscroll-behavior: none; /* Mata o elástico nativo do navegador */
+            position: fixed; /* Trava o viewport */
         }
 
+        /* 2. IFRAME E PREENCHIMENTO */
         iframe {
             position: absolute;
-            width: 100%;
+            width: 100vw;
             border: none;
             
-            /* Começa exatamente abaixo da área do topo */
+            /* Empurra o iframe pra baixo apenas o espaço exato da Ilha Dinâmica/Notch */
             top: env(safe-area-inset-top);
             
-            /* Altura exata: 100dvh menos a safe area do topo e menos a safe area de baixo */
-            height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            /* Altura preenche tudo até o fim físico da tela (elimina a área morta branca) */
+            height: calc(100dvh - env(safe-area-inset-top));
             
-            left: env(safe-area-inset-left);
-            right: env(safe-area-inset-right);
+            left: 0;
+            
+            /* Garante que o fundo das páginas internas continue claro */
+            background-color: #f8fafc;
         }
     </style>
 </head>
