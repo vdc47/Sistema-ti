@@ -11,13 +11,20 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
+        /* RESET E BLOQUEIO DO EFEITO ELÁSTICO (RUBBER-BAND) */
         body, html {
             margin: 0;
             padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #f8fafc; /* Cor de fundo para mesclar com o tema escuro */
+            width: 100vw;
+            height: 100dvh;
+            
+            /* Cor escura igual ao cabeçalho mobile do seu app (#0f172a). 
+               Isso faz a área do relógio/ilha dinâmica ficar da mesma cor do cabeçalho */
+            background-color: #0f172a; 
+            
             overflow: hidden;
+            overscroll-behavior: none; /* Mata o efeito elástico nativo do iOS */
+            position: fixed; /* Trava o fundo completamente, impedindo qualquer arraste da janela */
         }
 
         iframe {
@@ -25,12 +32,17 @@
             width: 100%;
             border: none;
             
-            /* Ajuste cirúrgico para a Ilha Dinâmica e altura real do dispositivo */
-            height: 100dvh;
-            top: max(0px);
+            /* Começa exatamente DEPOIS da Ilha Dinâmica / Relógio */
+            top: env(safe-area-inset-top);
             
-            /* Puxa o iframe para cima para engolir a faixa do Apps Script */
+            /* A altura é 100dvh MENOS a ilha dinâmica (topo) e MENOS a barrinha de home (baixo). 
+               Isso resolve a barra branca sobrando e encaixa o app no milímetro */
+            height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            
             margin-top: 0px; 
+            
+            /* Garante que o fundo do iframe em si tenha a cor clara do sistema */
+            background-color: #f8fafc;
         }
     </style>
 </head>
