@@ -12,38 +12,34 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
-        /* 1. TRAVA DO SISTEMA E COR DO TOPO */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100dvh;
             
-            /* COR CRÍTICA: Pinta a área do relógio/bateria E o fundo do efeito elástico 
-               com a mesma cor do cabeçalho do seu sistema, camuflando o "puxão" */
+            /* UNIFICAÇÃO DO TOPO: Alterado para a cor escura exata do seu cabeçalho (#0f172a).
+               Isso fará com que a área do relógio e da bateria se misture nativamente com o app */
             background-color: #0f172a; 
             
             overflow: hidden;
-            overscroll-behavior: none; /* Mata o elástico nativo do navegador */
-            position: fixed; /* Trava o viewport */
+            overscroll-behavior: none;
+            position: fixed;
         }
 
-        /* 2. IFRAME E PREENCHIMENTO */
         iframe {
             position: absolute;
             width: 100vw;
             border: none;
             
-            /* Empurra o iframe pra baixo apenas o espaço exato da Ilha Dinâmica/Notch */
+            /* Inicia logo após a barra de status do iPhone */
             top: env(safe-area-inset-top);
             
-            /* Altura preenche tudo até o fim físico da tela (elimina a área morta branca) */
+            /* CORREÇÃO DA ZONA MORTA: Removemos o desconto do safe-area-inset-bottom.
+               Agora o iframe desce e preenche o espaço até o limite físico da tela */
             height: calc(100dvh - env(safe-area-inset-top));
             
             left: 0;
-
-            
-            /* Garante que o fundo das páginas internas continue claro */
             background-color: #f8fafc;
         }
     </style>
