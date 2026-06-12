@@ -1,61 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-    <title>Sistema ATI</title>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Sistema ATI">
-    
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sistema ATI</title>
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100dvh;
-            
-            /* FUNDO CLARO: Faz a área morta de baixo (Home Indicator) sumir, misturando com o app */
-            background-color: #f8fafc; 
-            
-            overflow: hidden;
-            position: fixed;
-        }
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Sistema ATI">
 
-        /* BLOCO DO TOPO: Pinta SÓ a área do relógio e Ilha Dinâmica de escuro */
-        .notch-escuro {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: env(safe-area-inset-top);
-            background-color: #0f172a; 
-            z-index: 10;
-        }
+<link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
-        /* IFRAME COM ALTURA EXPLÍCITA: O iOS não consegue esmagar isso */
-        iframe {
-            position: absolute;
-            top: env(safe-area-inset-top);
-            left: 0;
-            width: 100vw;
-            
-            /* A MÁGICA ESTÁ AQUI: Altura total MENOS a área do topo. Encaixe milimétrico! */
-            height: calc(100dvh - env(safe-area-inset-top)); 
-            
-            border: none;
-            background-color: transparent;
-        }
-    </style>
+<style>
+:root {
+    --vh: 1vh;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #f8fafc;
+}
+
+body {
+    position: fixed;
+    inset: 0;
+}
+
+.notch-escuro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
+    background: #0f172a;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--vh) * 100);
+    border: none;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: #f8fafc;
+}
+</style>
 </head>
+
 <body>
-    
-    <div class="notch-escuro"></div>
-    
-    <iframe src="https://script.google.com/macros/s/AKfycbxkD8vzWeBq-mx00s_QP4jh_570VBDOjsTN09jK4sQcZrhKzubiDmH88zhw7mOhpon4hA/exec" allowfullscreen></iframe>
+
+<div class="notch-escuro"></div>
+
+<iframe
+    src="https://script.google.com/macros/s/AKfycbxkD8vzWeBq-mx00s_QP4jh_570VBDOjsTN09jK4sQcZrhKzubiDmH88zhw7mOhpon4hA/exec"
+    allowfullscreen>
+</iframe>
+
+<script>
+function ajustarAltura() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+ajustarAltura();
+
+window.addEventListener('resize', ajustarAltura);
+window.addEventListener('orientationchange', ajustarAltura);
+</script>
 
 </body>
 </html>
