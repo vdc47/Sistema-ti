@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <title>MeuOrc</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Sistema ATI</title>
-
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
+    <meta name="apple-mobile-web-app-title" content="MeuOrc">
+    
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/athusluz/MeuOrc/1ea1646f5b65dfc9438dc60321b08d4619c21716/MEUORC.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/athusluz/MeuPainelMusical/refs/heads/main/7fdbeeba-7654-4d85-86d1-99a20a934d96-wm.ico">
 
     <style>
-        /* RESET E BLOQUEIO DO EFEITO ELÁSTICO (RUBBER-BAND) */
+        /* RESET E BLOQUEIO DO EFEITO ELÁSTICO */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
             height: 100dvh;
             
-            /* Cor escura igual ao cabeçalho mobile do seu app (#0f172a). 
-               Isso faz a área do relógio/ilha dinâmica ficar da mesma cor do cabeçalho */
+            /* Esta cor vai preencher a área do relógio e a faixa inferior (barrinha home) */
             background-color: #f8fafc; 
             
             overflow: hidden;
-            overscroll-behavior: none; /* Mata o efeito elástico nativo do iOS */
-            position: fixed; /* Trava o fundo completamente, impedindo qualquer arraste da janela */
+            overscroll-behavior: none; /* Mata o efeito elástico nativo */
+            position: fixed; /* Trava o viewport, impedindo arraste da janela */
         }
 
         iframe {
@@ -32,23 +32,18 @@
             width: 100%;
             border: none;
             
-            /* Começa exatamente DEPOIS da Ilha Dinâmica / Relógio */
+            /* Começa exatamente abaixo da área do topo */
             top: env(safe-area-inset-top);
             
-            /* A altura é 100dvh MENOS a ilha dinâmica (topo) e MENOS a barrinha de home (baixo). 
-               Isso resolve a barra branca sobrando e encaixa o app no milímetro */
+            /* Altura exata: 100dvh menos a safe area do topo e menos a safe area de baixo */
             height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
             
-            margin-top: 0px; 
-            
-            /* Garante que o fundo do iframe em si tenha a cor clara do sistema */
-            background-color: #f8fafc;
+            left: env(safe-area-inset-left);
+            right: env(safe-area-inset-right);
         }
     </style>
 </head>
 <body>
-
-    <iframe src="https://script.google.com/macros/s/AKfycbxkD8vzWeBq-mx00s_QP4jh_570VBDOjsTN09jK4sQcZrhKzubiDmH88zhw7mOhpon4hA/exec" allowfullscreen></iframe>
-
+    <iframe src="https://script.google.com/macros/s/AKfycbzUCFNWQW5T98DBVjhhVbmiFM031RCJTKwZ-9FfU9KfdRiGVCOFM9iunnicfaAwF-R-bg/exec" allowfullscreen></iframe>
 </body>
 </html>
