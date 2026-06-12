@@ -12,41 +12,46 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
-        /* 1. TRAVA DO SISTEMA EM FLEXBOX */
+        /* 1. TRAVA ABSOLUTA NO VIDRO DO CELULAR */
         body, html {
             margin: 0;
             padding: 0;
-            width: 100vw;
-            height: 100dvh; /* Trava na altura real da tela */
-            background-color: #0f172a; /* Cor padrão escura */
-            overflow: hidden;
-            position: fixed;
             
-            /* Ativa o Flexbox para empilhar os elementos */
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 2. ESPAÇADOR DA ILHA DINÂMICA */
-        .notch-spacer {
+            /* Abandonamos o height 100dvh. Aqui cravamos as coordenadas nos limites da tela física */
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
             width: 100%;
-            height: env(safe-area-inset-top); /* Pega exatamente o tamanho da câmera/relógio */
-            background-color: #0f172a; /* Cor do seu cabeçalho */
-            flex-shrink: 0; /* Impede que essa área seja esmagada */
+            height: 100%;
+            
+            /* Cor que vai preencher a área do relógio/bateria */
+            background-color: #0f172a; 
+            overflow: hidden;
         }
 
-        /* 3. O SEU SISTEMA */
+        /* 2. IFRAME PREGADO NO CHÃO */
         iframe {
+            position: absolute;
+            left: 0;
+            right: 0;
+            
+            /* Cola o fundo do iframe no chão absoluto da tela, ignorando a barra do navegador */
+            bottom: 0; 
+            
+            /* Empurra o topo apenas o suficiente para não esconder o seu menu atrás do relógio/câmera */
+            top: env(safe-area-inset-top); 
+            
             width: 100%;
-            flex-grow: 1; /* Manda o iframe crescer e preencher 100% do espaço que sobrou */
             border: none;
-            background-color: #f8fafc; /* Fundo claro para o restante do app */
+            
+            /* O fundo claro garante que o seu sistema mantenha a cor correta */
+            background-color: #f8fafc;
         }
     </style>
 </head>
 <body>
-    
-    <div class="notch-spacer"></div>
     
     <iframe src="https://script.google.com/macros/s/AKfycbxkD8vzWeBq-mx00s_QP4jh_570VBDOjsTN09jK4sQcZrhKzubiDmH88zhw7mOhpon4hA/exec" allowfullscreen></iframe>
 
