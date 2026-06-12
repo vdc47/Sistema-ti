@@ -12,53 +12,43 @@
     <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico">
 
     <style>
-        /* 1. TRAVA DO SISTEMA E FUNDO CLARO */
+        /* 1. TRAVA DO SISTEMA EM FLEXBOX */
         body, html {
             margin: 0;
             padding: 0;
             width: 100vw;
-            height: 100dvh;
-            
-            /* Fundo geral da página claro. Resolve de vez a barra escura inferior */
-            background-color: #f8fafc; 
-            
+            height: 100dvh; /* Trava na altura real da tela */
+            background-color: #0f172a; /* Cor padrão escura */
             overflow: hidden;
-            overscroll-behavior: none;
             position: fixed;
+            
+            /* Ativa o Flexbox para empilhar os elementos */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 2. TRUQUE DO TOPO ESCURO */
-        /* Cria uma faixa que ocupa EXATAMENTE a área do relógio e da Ilha Dinâmica */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: env(safe-area-inset-top);
-            background-color: #0f172a; /* Azul escuro do seu cabeçalho */
-            z-index: 1;
+        /* 2. ESPAÇADOR DA ILHA DINÂMICA */
+        .notch-spacer {
+            width: 100%;
+            height: env(safe-area-inset-top); /* Pega exatamente o tamanho da câmera/relógio */
+            background-color: #0f172a; /* Cor do seu cabeçalho */
+            flex-shrink: 0; /* Impede que essa área seja esmagada */
         }
 
-        /* 3. IFRAME COLADO NO CHÃO */
+        /* 3. O SEU SISTEMA */
         iframe {
-            position: absolute;
-            width: 100vw;
+            width: 100%;
+            flex-grow: 1; /* Manda o iframe crescer e preencher 100% do espaço que sobrou */
             border: none;
-            
-            /* Inicia logo abaixo da faixa escura do relógio */
-            top: env(safe-area-inset-top);
-            
-            /* O pulo do gato: em vez de calcular a altura, colamos a base no fundo da tela (0) */
-            bottom: 0;
-            left: 0;
-            
-            z-index: 2;
-            background-color: transparent;
+            background-color: #f8fafc; /* Fundo claro para o restante do app */
         }
     </style>
 </head>
 <body>
+    
+    <div class="notch-spacer"></div>
+    
     <iframe src="https://script.google.com/macros/s/AKfycbxkD8vzWeBq-mx00s_QP4jh_570VBDOjsTN09jK4sQcZrhKzubiDmH88zhw7mOhpon4hA/exec" allowfullscreen></iframe>
+
 </body>
 </html>
