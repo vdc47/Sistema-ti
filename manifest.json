@@ -1,0 +1,16 @@
+{
+  "name": "Sistema ATI",
+  "short_name": "Sistema ATI",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#f8fafc",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/vdc47/Sistema-ti/refs/heads/main/efadbb17-63fc-4712-b9b0-338b1955846c-wm.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}
